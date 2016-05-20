@@ -16,11 +16,24 @@ class BitmapEditor
           width: input[1].to_i,
           height: input[2].to_i
         )
+      when 'L'
+        @image.colour_at(
+          x: input[1],
+          y: input[2],
+          c: input[3]
+        )
       when 'V'
         @image.v_segment(
           x: input[1].to_i,
           y1: input[2].to_i,
           y2: input[3].to_i,
+          c: input[4]
+        )
+      when 'H'
+        @image.h_segment(
+          x1: input[1].to_i,
+          x2: input[2].to_i,
+          y: input[3].to_i,
           c: input[4]
         )
       when 'S'
