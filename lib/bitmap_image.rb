@@ -3,7 +3,7 @@ class BitmapImage
   WHITE = 'O'
 
   def initialize(width:, height:)
-    @image = blank(width.to_i, height.to_i)
+    @image = blank(width, height)
   end
 
   def reset
@@ -17,6 +17,18 @@ class BitmapImage
     array_y = y - 1
 
     @image[array_y][array_x] = c
+  end
+
+  def v_segment(x:, y1:, y2:, c:)
+    y1.upto(y2) do |y|
+      colour_at(x: x, y: y, c: c)
+    end
+  end
+
+  def h_segment(x1:, x2:, y:, c:)
+    x1.upto(x2) do |x|
+      colour_at(x: x, y: y, c: c)
+    end
   end
 
   def show
