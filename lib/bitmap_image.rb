@@ -12,6 +12,13 @@ class BitmapImage
     @image = blank(width, height)
   end
 
+  def colour_at(x:, y:, c:)
+    array_x = x - 1
+    array_y = y - 1
+
+    @image[array_y][array_x] = c
+  end
+
   def show
     @image.each { |pixel| puts pixel.join('') }
   end
@@ -19,6 +26,6 @@ class BitmapImage
   private
 
   def blank(width, height)
-    Array.new(height, Array.new(width, WHITE))
+    Array.new(height) { Array.new(width, WHITE) }
   end
 end
