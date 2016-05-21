@@ -6,14 +6,14 @@ class BitmapImage
   attr_reader :image
   WHITE = 'O'.freeze
 
-  def initialize(width:, height:)
-    @image = blank(width, height)
+  def initialize(width:, height:, c: WHITE)
+    @image = blank(width, height, c)
   end
 
-  def reset
+  def reset(c: WHITE)
     width = @image.first.length
     height = @image.length
-    @image = blank(width, height)
+    @image = blank(width, height, c)
   end
 
   def colour_at(x:, y:, c:)
@@ -49,10 +49,10 @@ class BitmapImage
 
   private
 
-  def blank(width, height)
+  def blank(width, height, c)
     width, height = validate_coordinates(width, height)
     check_range(width, height)
-    Array.new(height) { Array.new(width, WHITE) }
+    Array.new(height) { Array.new(width, c) }
   end
 
   def validate_coordinates(*values)
