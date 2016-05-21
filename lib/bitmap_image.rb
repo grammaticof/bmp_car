@@ -43,6 +43,17 @@ class BitmapImage
     end
   end
 
+  def resize(width:, height:, c: WHITE)
+    new_image = blank(width, height, c)
+
+    new_image.each_with_index do |row, y|
+      row.map!.with_index do |_, x|
+        @image.dig(y, x) || c
+      end
+    end
+    @image = new_image
+  end
+
   def show
     @image.each { |pixel| puts pixel.join('') }
   end

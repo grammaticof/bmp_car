@@ -78,4 +78,25 @@ describe BitmapImage do
       expect { bitmap.h_segment(x1: 10, x2: 10, y: 10, c: 'z') }.to raise_error(BitmapError::Base)
     end
   end
+
+  context '#scale(x:10, y:10)' do
+    let(:bitmap) { BitmapImage.new(width: 3, height: 4) }
+    let(:result_extend) do
+      [%w(O O O O O),
+       %w(O C O O O),
+       %w(O C O O O),
+       %w(O C O O O),
+       %w(O O O O O)]
+    end
+    let(:result_shrink) do
+      [%w(O O),
+       %w(O C)]
+    end
+
+    it 'rescales the image to different size' do
+      bitmap.v_segment(x: 2, y1: 2, y2: 4, c: 'C')
+      expect(bitmap.resize(width: 5, height: 5)).to match_array(result_extend)
+      expect(bitmap.resize(width: 2, height: 2)).to match_array(result_shrink)
+    end
+  end
 end
