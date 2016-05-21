@@ -18,6 +18,7 @@ class BitmapImage
 
   def colour_at(x:, y:, c:)
     x, y = valid_coordinates(x, y)
+    valid_colour?(c)
 
     array_x = x - 1
     array_y = y - 1
@@ -65,5 +66,6 @@ class BitmapImage
   end
 
   def valid_colour?(value)
+    raise BitmapError::Base, 'Not a valid colour' unless /[[:upper:]]/.match(value)
   end
 end

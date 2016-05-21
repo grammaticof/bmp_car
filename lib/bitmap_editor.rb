@@ -2,16 +2,17 @@ require_relative 'bitmap_image'
 
 class BitmapEditor
   def run
+    @running = true
     puts 'type ? for help'
 
-    loop do
+    while @running
       print '> '
       input = gets.split(' ')
 
       begin
         case input.first
         when 'X'
-          break
+          exit_console
         when 'I'
           @image = BitmapImage.new(width: input[1], height: input[2])
         when 'L'
@@ -33,11 +34,13 @@ class BitmapEditor
         puts e.message
       end
     end
-
-    puts 'goodbye!'
   end
 
   private
+  def exit_console
+    puts 'goodbye!'
+    @running = false
+  end
 
   def show_help
     puts "? - Help

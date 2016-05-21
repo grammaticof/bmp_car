@@ -73,5 +73,9 @@ describe BitmapImage do
     it 'raises an error if out of bounds' do
       expect { bitmap.h_segment(x1: 10, x2: 10, y: 10, c: 'C') }.to raise_error(BitmapError::Base)
     end
+
+    it 'raises an error if color not recognised' do
+      expect { bitmap.h_segment(x1: 10, x2: 10, y: 10, c: 'z') }.to raise_error(BitmapError::Base)
+    end
   end
 end
