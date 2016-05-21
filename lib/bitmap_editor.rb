@@ -15,15 +15,15 @@ class BitmapEditor
         when 'I'
           @image = BitmapImage.new(width: input[1], height: input[2])
         when 'L'
-          @image.colour_at(x: input[1], y: input[2], c: input[3]) if @image
+          @image ? @image.colour_at(x: input[1], y: input[2], c: input[3]) : show_help
         when 'V'
-          @image.v_segment(x: input[1], y1: input[2], y2: input[3], c: input[4]) if @image
+          @image ? @image.v_segment(x: input[1], y1: input[2], y2: input[3], c: input[4]) : show_help
         when 'H'
-          @image.h_segment(x1: input[1], x2: input[2], y: input[3], c: input[4]) if @image
+          @image ? @image.h_segment(x1: input[1], x2: input[2], y: input[3], c: input[4]) : show_help
         when 'S'
-          @image.show if @image
+          @image ? @image.show : show_help
         when 'C'
-          @image.reset
+          @image ? @image.reset : show_help
         when '?'
           show_help
         else
