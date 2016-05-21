@@ -78,4 +78,19 @@ describe BitmapImage do
       expect { bitmap.h_segment(x1: 10, x2: 10, y: 10, c: 'z') }.to raise_error(BitmapError::Base)
     end
   end
+
+  context '#fill(x1: 2, y1: 2, x2: 4, y2: 4, c: "C")' do
+    let(:bitmap) { BitmapImage.new(width: 4, height: 4) }
+    let(:result) do
+      [%w(O O O O),
+       %w(O X X O),
+       %w(O X X O),
+       %w(O O O O)]
+    end
+
+    it 'modifies the fill the coordinates with a specified colour' do
+      bitmap.fill(x1: 2, y1: 2, x2: 3, y2: 3, c: 'X')
+      expect(bitmap.image).to match_array(result)
+    end
+  end
 end

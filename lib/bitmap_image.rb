@@ -43,6 +43,14 @@ class BitmapImage
     end
   end
 
+  def fill(x1:, y1:, x2:, y2:, c:)
+    x1, y1, x2, y2 = validate_coordinates(x1, y1, x2, y2)
+
+    y1.upto(y2) do |y|
+      h_segment(x1: x1, x2: x2, y: y, c: c)
+    end
+  end
+
   def show
     @image.each { |pixel| puts pixel.join('') }
   end
