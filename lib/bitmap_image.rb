@@ -17,7 +17,7 @@ class BitmapImage
   end
 
   def colour_at(x:, y:, c:)
-    x, y = valid_coordinates(x, y)
+    x, y = validate_coordinates(x, y)
     valid_colour?(c)
 
     array_x = x - 1
@@ -28,7 +28,7 @@ class BitmapImage
   end
 
   def v_segment(x:, y1:, y2:, c:)
-    x, y1, y2 = valid_coordinates(x, y1, y2)
+    x, y1, y2 = validate_coordinates(x, y1, y2)
 
     y1.upto(y2) do |y|
       colour_at(x: x, y: y, c: c)
@@ -36,7 +36,7 @@ class BitmapImage
   end
 
   def h_segment(x1:, x2:, y:, c:)
-    x1, x2, y = valid_coordinates(x1, x2, y)
+    x1, x2, y = validate_coordinates(x1, x2, y)
 
     x1.upto(x2) do |x|
       colour_at(x: x, y: y, c: c)
@@ -50,12 +50,12 @@ class BitmapImage
   private
 
   def blank(width, height)
-    width, height = valid_coordinates(width, height)
+    width, height = validate_coordinates(width, height)
     check_range(width, height)
     Array.new(height) { Array.new(width, WHITE) }
   end
 
-  def valid_coordinates(*values)
+  def validate_coordinates(*values)
     values.map { |v| Integer(v) }
   rescue ArgumentError, TypeError
     raise BitmapError::Base, 'Not Integer values'
@@ -66,6 +66,6 @@ class BitmapImage
   end
 
   def valid_colour?(value)
-    raise BitmapError::Base, 'Not a valid colour' unless /[[:upper:]]/.match(value)
+    raise BitmapError::Base, 'Not a valid colour' unless /[[:upper:]]/ =~ value
   end
 end
