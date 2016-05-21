@@ -8,42 +8,29 @@ class BitmapEditor
       print '> '
       input = gets.split(' ')
 
-      case input.first
-      when 'X'
-        break
-      when 'I'
-        @image = BitmapImage.new(
-          width: input[1].to_i,
-          height: input[2].to_i
-        )
-      when 'L'
-        @image.colour_at(
-          x: input[1],
-          y: input[2],
-          c: input[3]
-        )
-      when 'V'
-        @image.v_segment(
-          x: input[1].to_i,
-          y1: input[2].to_i,
-          y2: input[3].to_i,
-          c: input[4]
-        )
-      when 'H'
-        @image.h_segment(
-          x1: input[1].to_i,
-          x2: input[2].to_i,
-          y: input[3].to_i,
-          c: input[4]
-        )
-      when 'S'
-        @image.show
-      when 'C'
-        @image.reset
-      when '?'
-        show_help
-      else
-        puts 'unrecognised command :('
+      begin
+        case input.first
+        when 'X'
+          break
+        when 'I'
+          @image = BitmapImage.new(width: input[1], height: input[2])
+        when 'L'
+          @image.colour_at(x: input[1], y: input[2], c: input[3]) if @image
+        when 'V'
+          @image.v_segment(x: input[1], y1: input[2], y2: input[3], c: input[4]) if @image
+        when 'H'
+          @image.h_segment(x1: input[1], x2: input[2], y: input[3], c: input[4]) if @image
+        when 'S'
+          @image.show if @image
+        when 'C'
+          @image.reset
+        when '?'
+          show_help
+        else
+          puts 'Unrecognised command :('
+        end
+      rescue BitmapError::Base => e
+        puts e.message
       end
     end
 
