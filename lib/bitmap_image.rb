@@ -51,7 +51,9 @@ class BitmapImage
 
   def blank(width, height, c)
     width, height = validate_coordinates(width, height)
-    check_range(width, height)
+    valid_range?(width, height)
+    valid_colour?(c)
+
     Array.new(height) { Array.new(width, c) }
   end
 
@@ -61,7 +63,7 @@ class BitmapImage
     raise BitmapError::Base, 'Not Integer values'
   end
 
-  def check_range(*values)
+  def valid_range?(*values)
     raise BitmapError::Base, 'Out of range' unless values.all? { |v| v.between?(0, 251) }
   end
 
