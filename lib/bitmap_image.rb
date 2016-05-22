@@ -5,6 +5,7 @@ class BitmapImage
 
   attr_reader :image
   WHITE = 'O'.freeze
+  MINMAX = 1..250
 
   def initialize(width:, height:, c: WHITE)
     @image = blank(width, height, c)
@@ -68,7 +69,7 @@ class BitmapImage
   end
 
   def valid_range?(*values)
-    raise BitmapError::Base, 'Out of range' unless values.all? { |v| v.between?(0, 251) }
+    raise BitmapError::Base, 'Out of range' unless values.all? { |v| MINMAX.cover?(v) }
   end
 
   def valid_colour?(value)

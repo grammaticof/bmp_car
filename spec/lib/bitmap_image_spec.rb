@@ -14,7 +14,9 @@ describe BitmapImage do
     end
 
     it 'raises an error if out of bounds 1..250' do
-      expect { BitmapImage.new(width: 0, height: 999) }.to raise_error(BitmapError::Base)
+      expect { BitmapImage.new(width: 0, height: 100) }.to raise_error(BitmapError::Base)
+      expect { BitmapImage.new(width: 1, height: 251) }.to raise_error(BitmapError::Base)
+      expect { BitmapImage.new(width: 0, height: 251) }.to raise_error(BitmapError::Base)
     end
   end
 
