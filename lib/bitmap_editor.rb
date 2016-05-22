@@ -1,4 +1,5 @@
 require_relative 'bitmap_image'
+require 'colorize'
 
 class BitmapEditor
   def run
@@ -28,10 +29,10 @@ class BitmapEditor
         when '?'
           show_help
         else
-          puts 'Unrecognised command :('
+          puts 'Unrecognised command :('.colorize(:red)
         end
       rescue BitmapError::Base => e
-        puts e.message
+        puts e.message.colorize(:red)
       end
     end
   end
@@ -39,7 +40,7 @@ class BitmapEditor
   private
 
   def exit_console
-    puts 'goodbye!'
+    puts 'goodbye!'.colorize(:green)
     @running = false
   end
 

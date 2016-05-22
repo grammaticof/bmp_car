@@ -24,6 +24,8 @@ class BitmapImage
     array_y = y - 1
 
     raise BitmapError::Base, 'Out of bounds values' if @image.dig(array_y, array_x).nil?
+
+    c = c.colorize(:red).on_white
     @image[array_y][array_x] = c
   end
 
@@ -54,13 +56,15 @@ class BitmapImage
     valid_range?(width, height)
     valid_colour?(c)
 
+    c = c.colorize(:black).on_white
+
     Array.new(height) { Array.new(width, c) }
   end
 
   def validate_coordinates(*values)
     values.map { |v| Integer(v) }
   rescue ArgumentError, TypeError
-    raise BitmapError::Base, 'Not Integer values'
+    raise BitmapError::Base, 'Wrong parameters'
   end
 
   def valid_range?(*values)
