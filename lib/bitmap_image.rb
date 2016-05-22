@@ -72,6 +72,6 @@ class BitmapImage
   end
 
   def valid_colour?(value)
-    raise BitmapError::Base, 'Not a valid colour' unless /[[:upper:]]/ =~ value
+    raise BitmapError::Base, 'Not a valid colour' unless /^[A-Z]{1}$/ =~ value
   end
 end

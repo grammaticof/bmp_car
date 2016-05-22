@@ -75,7 +75,9 @@ describe BitmapImage do
     end
 
     it 'raises an error if color not recognised' do
-      expect { bitmap.h_segment(x1: 10, x2: 10, y: 10, c: 'z') }.to raise_error(BitmapError::Base)
+      expect { bitmap.h_segment(x1: 1, x2: 2, y: 4, c: 'c') }.to raise_error(BitmapError::Base)
+      expect { bitmap.h_segment(x1: 1, x2: 2, y: 4, c: 'CC') }.to raise_error(BitmapError::Base)
+      expect { bitmap.h_segment(x1: 1, x2: 2, y: 4, c: '1') }.to raise_error(BitmapError::Base)
     end
   end
 end
